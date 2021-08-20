@@ -1,11 +1,12 @@
-﻿using System;
+﻿using eBibliotekaCloud.Data.Models.DTOs.Kartica;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eBibliotekaCloud.Models
+namespace eBibliotekaCloud.Data.Models.DTOs.Korisnik
 {
-    public class Korisnik
+    public class KorisnikReadDTO
     {
         public int Id { get; set; }
         public string FirebaseId { get; set; }
@@ -17,8 +18,6 @@ namespace eBibliotekaCloud.Models
         public string Adresa { get; set; }
         public bool IsUclanjen { get; set; }
 
-        public ICollection<Kartica> Kartice { get; set; }
-
-
+        public ICollection<KarticaReadDTO> Kartice { get; set; }
     }
 }

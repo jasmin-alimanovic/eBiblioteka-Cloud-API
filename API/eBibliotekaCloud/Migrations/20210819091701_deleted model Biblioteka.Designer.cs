@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eBibliotekaCloud.Data;
 
 namespace eBibliotekaCloud.Migrations
 {
     [DbContext(typeof(BibliotekaContext))]
-    partial class BibliotekaContextModelSnapshot : ModelSnapshot
+    [Migration("20210819091701_deleted model Biblioteka")]
+    partial class deletedmodelBiblioteka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,17 +21,17 @@ namespace eBibliotekaCloud.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("eBibliotekaCloud.Data.Models.KnjigaZanr", b =>
+            modelBuilder.Entity("KnjigaZanr", b =>
                 {
-                    b.Property<int>("KnjigaId")
+                    b.Property<int>("KnjigeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ZanrId")
+                    b.Property<int>("ZanroviId")
                         .HasColumnType("int");
 
-                    b.HasKey("KnjigaId", "ZanrId");
+                    b.HasKey("KnjigeId", "ZanroviId");
 
-                    b.HasIndex("ZanrId");
+                    b.HasIndex("ZanroviId");
 
                     b.ToTable("KnjigaZanr");
                 });
@@ -391,23 +393,19 @@ namespace eBibliotekaCloud.Migrations
                     b.ToTable("Zaposlenci");
                 });
 
-            modelBuilder.Entity("eBibliotekaCloud.Data.Models.KnjigaZanr", b =>
+            modelBuilder.Entity("KnjigaZanr", b =>
                 {
-                    b.HasOne("eBibliotekaCloud.Models.Knjiga", "Knjiga")
-                        .WithMany("Zanrovi")
-                        .HasForeignKey("KnjigaId")
+                    b.HasOne("eBibliotekaCloud.Models.Knjiga", null)
+                        .WithMany()
+                        .HasForeignKey("KnjigeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("eBibliotekaCloud.Models.Zanr", "Zanr")
-                        .WithMany("Knjige")
-                        .HasForeignKey("ZanrId")
+                    b.HasOne("eBibliotekaCloud.Models.Zanr", null)
+                        .WithMany()
+                        .HasForeignKey("ZanroviId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Knjiga");
-
-                    b.Navigation("Zanr");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Kartica", b =>
@@ -531,8 +529,6 @@ namespace eBibliotekaCloud.Migrations
             modelBuilder.Entity("eBibliotekaCloud.Models.Knjiga", b =>
                 {
                     b.Navigation("Nabavke");
-
-                    b.Navigation("Zanrovi");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Korisnik", b =>
@@ -543,11 +539,6 @@ namespace eBibliotekaCloud.Migrations
             modelBuilder.Entity("eBibliotekaCloud.Models.Zaduzba", b =>
                 {
                     b.Navigation("Stavke");
-                });
-
-            modelBuilder.Entity("eBibliotekaCloud.Models.Zanr", b =>
-                {
-                    b.Navigation("Knjige");
                 });
 #pragma warning restore 612, 618
         }

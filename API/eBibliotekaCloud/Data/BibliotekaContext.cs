@@ -1,4 +1,5 @@
 ﻿using eBibliotekaCloud.Data.EntityConfig;
+using eBibliotekaCloud.Data.Models;
 using eBibliotekaCloud.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,11 +12,11 @@ namespace eBibliotekaCloud.Data
     public class BibliotekaContext:DbContext
     {
         public DbSet<Korisnik> Korisnici { get; set; }
-        public DbSet<Biblioteka> Biblioteke { get; set; }
         public DbSet<Zaposlenik> Zaposlenci { get; set; }
         public DbSet<Zanr> Zanrovi { get; set; }
         public DbSet<KnjigaNabavka> NabakveKnjiga { get; set; }
         public DbSet<Knjiga> Knjige { get; set; }
+        public DbSet<KnjigaZanr> KnjigaZanr { get; set; }
         public DbSet<Izdavac> Izdavaci { get; set; }
         public DbSet<Kategorija> Kategorije { get; set; }
         public DbSet<Zaduzba> Zaduzbe { get; set; }
@@ -32,7 +33,19 @@ namespace eBibliotekaCloud.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<KnjigaZanr>()
+                .HasKey(i => new { i.KnjigaId, i.ZanrId });
+
+            modelBuilder.Entity<KnjigaZanr>()
+                .HasOne(kz => kz.Knjiga)
+                .WithMany(k => k.KnjigaZanr)
+                .HasForeignKey(kz => kz.KnjigaId);
+            modelBuilder.Entity<KnjigaZanr>()
+                .HasOne(kz => kz.Zanr)
+                .WithMany(z => z.KnjigaZanr)
+                .HasForeignKey(kz => kz.ZanrId);
             modelBuilder.ApplyConfiguration(new KnjigaConfig());
+            
 
             base.OnModelCreating(modelBuilder);
         }

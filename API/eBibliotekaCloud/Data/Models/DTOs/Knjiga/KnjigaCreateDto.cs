@@ -1,52 +1,49 @@
-﻿using eBibliotekaCloud.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eBibliotekaCloud.Models
+namespace eBibliotekaCloud.Data.Models.DTOs.Knjiga
 {
-    public class Knjiga
+    public class KnjigaCreateDto
     {
-        public int Id { get; set; }
+        [Required]
         public string Naziv { get; set; }
+        [Required]
         public string ISBN { get; set; }
         public int GodinaIzdavanja { get; set; }
+        [Required]
         public string KratkiOpis { get; set; }
+        [Required]
         public string DugiOpis { get; set; }
         public double Popust { get; set; }
+        [Required]
         public double Cijena { get; set; }
-        public int Dostupno { get; set; } //broj knjiga koje su dostupne
-        public int Ukupno { get; set; } //ukupan broj knjiga(dostupnih i nedostupnih)
+        [Required]
         public string ImageUrl { get; set; }
         public string PdfUrl { get; set; }
         public string Izdanje { get; set; }
-        public string Pismo{ get; set; }
-        public bool IsDeleted { get; set; }
+        [Required]
+        public string Pismo { get; set; }
 
 
         //FK za autora
+        [Required]
         public int AutorId { get; set; }
-        public Autor Autor { get; set; }
 
-        //FK za KnjigaNabavka
-        public ICollection<KnjigaNabavka> Nabavke{ get; set; }
 
         //FK za Izdavac
+        [Required]
         public int IzdavacId { get; set; }
-        public Izdavac Izdavac{ get; set; }
 
         //FK za Jezik
+        [Required]
         public int JezikId { get; set; }
-        public Jezik Jezik { get; set; }
 
         //FK za kategoriju
+        [Required]
         public int KategorijaId { get; set; }
-        public Kategorija Kategorija { get; set; }
-
-        //FK za zanrove
-        public ICollection<KnjigaZanr> KnjigaZanr { get; set; }
-
 
     }
 }

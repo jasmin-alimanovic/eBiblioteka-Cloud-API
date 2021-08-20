@@ -1,4 +1,6 @@
 using eBibliotekaCloud.Data;
+using eBibliotekaCloud.Repositories;
+using eBibliotekaCloud.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +31,10 @@ namespace eBibliotekaCloud
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eBibliotekaCloud", Version = "v1" });
@@ -39,6 +44,15 @@ namespace eBibliotekaCloud
             {
                 options.UseSqlServer(Configuration.GetConnectionString("BibliotekaConnection"));
             });
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //interni servisi
+
+            //repozitoriji
+            services.AddScoped<IBookRepo, BookRepo>();
+
+            //servisi
+            services.AddScoped<IBookService, BookService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

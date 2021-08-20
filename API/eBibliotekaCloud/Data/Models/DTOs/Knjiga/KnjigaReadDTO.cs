@@ -1,12 +1,17 @@
-﻿using eBibliotekaCloud.Data.Models;
+﻿using eBibliotekaCloud.Data.Models.DTOs.Autor;
+using eBibliotekaCloud.Data.Models.DTOs.Izdavac;
+using eBibliotekaCloud.Data.Models.DTOs.Jezik;
+using eBibliotekaCloud.Data.Models.DTOs.Kategorija;
+using eBibliotekaCloud.Data.Models.DTOs.KnjigaZanr;
+using eBibliotekaCloud.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eBibliotekaCloud.Models
+namespace eBibliotekaCloud.Data.Models.DTOs.Knjiga
 {
-    public class Knjiga
+    public class KnjigaReadDTO
     {
         public int Id { get; set; }
         public string Naziv { get; set; }
@@ -21,32 +26,23 @@ namespace eBibliotekaCloud.Models
         public string ImageUrl { get; set; }
         public string PdfUrl { get; set; }
         public string Izdanje { get; set; }
-        public string Pismo{ get; set; }
-        public bool IsDeleted { get; set; }
+        public string Pismo { get; set; }
 
 
         //FK za autora
-        public int AutorId { get; set; }
-        public Autor Autor { get; set; }
+        public AutorReadDTO Autor { get; set; }
 
-        //FK za KnjigaNabavka
-        public ICollection<KnjigaNabavka> Nabavke{ get; set; }
 
         //FK za Izdavac
-        public int IzdavacId { get; set; }
-        public Izdavac Izdavac{ get; set; }
+        public IzdavacReadDTO Izdavac { get; set; }
 
         //FK za Jezik
-        public int JezikId { get; set; }
-        public Jezik Jezik { get; set; }
+        public JezikReadDTO Jezik { get; set; }
 
         //FK za kategoriju
-        public int KategorijaId { get; set; }
-        public Kategorija Kategorija { get; set; }
+        public KategorijaReadDTO Kategorija { get; set; }
 
         //FK za zanrove
-        public ICollection<KnjigaZanr> KnjigaZanr { get; set; }
-
-
+        public ICollection<KnjigaZanrReadDTO> KnjigaZanr { get; set; }
     }
 }

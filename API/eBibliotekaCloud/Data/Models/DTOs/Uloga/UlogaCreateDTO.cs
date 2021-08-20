@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eBibliotekaCloud.Models
+namespace eBibliotekaCloud.Data.Models.DTOs.Uloga
 {
-    public class Kategorija
+    public class UlogaCreateDTO
     {
-        public int Id { get; set; }
         public string Naziv { get; set; }
-        public ICollection<Knjiga> Knjige { get; set; }
     }
 }

@@ -14,6 +14,8 @@ namespace eBibliotekaCloud.Data.EntityConfig
         {
             builder.HasKey(t => t.Id);
             builder.ToTable("Knjiga");
+            builder.Property(b => b.ISBN).IsRequired();
+            builder.HasIndex(b=>b.ISBN).IsUnique();
 
             builder
                 .HasOne(t => t.Autor)
@@ -30,9 +32,12 @@ namespace eBibliotekaCloud.Data.EntityConfig
                 .WithMany(i => i.Knjige)
                 .HasForeignKey(t => t.JezikId);
 
-            builder.
-                HasMany(t => t.Zanrovi)
-                .WithMany(z => z.Knjige);
+            
+
+            builder
+                .HasOne(b => b.Kategorija)
+                .WithMany(k => k.Knjige)
+                .HasForeignKey(b => b.KategorijaId);
                 
         }
     }

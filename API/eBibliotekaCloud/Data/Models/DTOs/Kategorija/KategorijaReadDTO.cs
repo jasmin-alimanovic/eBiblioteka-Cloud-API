@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eBibliotekaCloud.Models
+namespace eBibliotekaCloud.Data.Models.DTOs.Kategorija
 {
-    public class Kategorija
+    public class KategorijaReadDTO
     {
         public int Id { get; set; }
         public string Naziv { get; set; }
-        public ICollection<Knjiga> Knjige { get; set; }
     }
 }
