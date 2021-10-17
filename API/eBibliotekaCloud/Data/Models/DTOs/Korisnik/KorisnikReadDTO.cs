@@ -17,7 +17,8 @@ namespace eBibliotekaCloud.Data.Models.DTOs.Korisnik
         public string Telefon { get; set; }
         public string Adresa { get; set; }
         public bool IsUclanjen { get; set; }
+        public DateTime DatumUclanjenja { get; set; }
 
-        public ICollection<KarticaReadDTO> Kartice { get; set; }
+        public ICollection<Zaduzba.ZaduzbaReadDTO> Zaduzbe { get; set; }
     }
 }

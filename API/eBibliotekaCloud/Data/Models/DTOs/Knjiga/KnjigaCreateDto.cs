@@ -14,16 +14,12 @@ namespace eBibliotekaCloud.Data.Models.DTOs.Knjiga
         public string ISBN { get; set; }
         public int GodinaIzdavanja { get; set; }
         [Required]
-        public string KratkiOpis { get; set; }
-        [Required]
-        public string DugiOpis { get; set; }
-        public double Popust { get; set; }
-        [Required]
-        public double Cijena { get; set; }
+        public string Opis { get; set; }
         [Required]
         public string ImageUrl { get; set; }
         public string PdfUrl { get; set; }
         public string Izdanje { get; set; }
+        public int Ukupno { get; set; } //ukupan broj knjiga(dostupnih i nedostupnih)
         [Required]
         public string Pismo { get; set; }
 

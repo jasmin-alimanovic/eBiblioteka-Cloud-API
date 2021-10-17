@@ -13,6 +13,7 @@ namespace eBibliotekaCloud.MappingProfiles
         public IzdavacProfile()
         {
             CreateMap<Izdavac, IzdavacReadDTO>();
+            CreateMap<IzdavacCreateDTO, Izdavac>();
         }
     }
 }

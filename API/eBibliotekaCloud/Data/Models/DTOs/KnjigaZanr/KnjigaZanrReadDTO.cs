@@ -8,7 +8,7 @@ namespace eBibliotekaCloud.Data.Models.DTOs.KnjigaZanr
 {
     public class KnjigaZanrReadDTO
     {
-        //public int KnjigaId { get; set; }
+       // public int KnjigaId { get; set; }
         //public KnjigaReadDTO Knjiga { get; set; }
 
         //public int ZanrId { get; set; }

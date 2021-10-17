@@ -13,6 +13,7 @@ namespace eBibliotekaCloud.MappingProfiles
         public JezikProfile()
         {
             CreateMap<Jezik, JezikReadDTO>();
+            CreateMap<JezikCreateDTO, Jezik>();
         }
     }
 }

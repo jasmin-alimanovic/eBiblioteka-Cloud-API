@@ -20,7 +20,6 @@ namespace eBibliotekaCloud.Data
         public DbSet<Izdavac> Izdavaci { get; set; }
         public DbSet<Kategorija> Kategorije { get; set; }
         public DbSet<Zaduzba> Zaduzbe { get; set; }
-        public DbSet<ZaduzbaStavke> StavkeZaduzbi { get; set; }
         public DbSet<Autor> Autori { get; set; }
         public DbSet<Jezik> Jezici { get; set; }
         public DbSet<Kartica> Kartice { get; set; }

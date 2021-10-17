@@ -7,6 +7,16 @@ using System.Threading.Tasks;
 
 namespace eBibliotekaCloud.Data.Models.DTOs.Korisnik
 {
+    public partial class FirebaseUser
+    {
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string Email { get; set; }
+        public string Telefon { get; set; }
+        public string Password { get; set; }
+    }
+
+
     public class KorisnikCreateDTO
     {
         public string FirebaseId { get; set; }
@@ -15,6 +25,7 @@ namespace eBibliotekaCloud.Data.Models.DTOs.Korisnik
         public string Email { get; set; }
         public string KorisnickoIme { get; set; }
         public string Telefon { get; set; }
+        public bool IsUclanjen { get; set; }
         public string Adresa { get; set; }
     }
 }

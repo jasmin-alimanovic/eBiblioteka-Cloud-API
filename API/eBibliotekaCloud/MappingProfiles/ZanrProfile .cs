@@ -9,7 +9,8 @@ namespace eBibliotekaCloud.MappingProfiles
         public ZanrProfile()
         {
             CreateMap<Zanr, ZanrReadDTO>();
-            CreateMap<ZanrReadDTO, Zanr>();
+            CreateMap<ZanrCreateDTO, Zanr>();
+
         }
     }
 }

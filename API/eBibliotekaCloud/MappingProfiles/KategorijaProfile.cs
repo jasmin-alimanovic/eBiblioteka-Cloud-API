@@ -13,6 +13,7 @@ namespace eBibliotekaCloud.MappingProfiles
         public KategorijaProfile()
         {
             CreateMap<Kategorija, KategorijaReadDTO>();
+            CreateMap<KategorijaCreateDTO, Kategorija>();
         }
     }
 }
