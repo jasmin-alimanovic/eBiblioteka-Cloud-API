@@ -29,9 +29,9 @@ namespace eBibliotekaCloud.Controllers
 
         // GET: api/Book
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Knjiga>>> GetKnjige(string sort, string q, int? page_index=1, int? page_size=5)
+        public async Task<ActionResult<IEnumerable<Knjiga>>> GetKnjige(string sort, string q, int? page_index=1, int? page_size=5, int? kategorija = null)
         {
-            var books= await _service.GetBooksAsync(sort, q, page_index, page_size);
+            var books= await _service.GetBooksAsync(sort, q, page_index, page_size, kategorija);
             string baseUrl = $"{Request?.Scheme}://{Request?.Host}";
 
             string prev = null, next = null;
@@ -80,8 +80,8 @@ namespace eBibliotekaCloud.Controllers
         [HttpPut("update/{id}")]
         public async Task<IActionResult> PutKnjiga(int id, KnjigaUpdateDTO knjiga)
         {
-            
-            if(!(await _service.UpdateBookAsync(id, knjiga)))
+            var response = await _service.UpdateBookAsync(id, knjiga);
+            if (!response)
             {
                 return BadRequest();
 

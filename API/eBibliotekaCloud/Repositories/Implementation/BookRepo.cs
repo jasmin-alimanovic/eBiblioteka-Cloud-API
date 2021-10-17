@@ -45,7 +45,7 @@ namespace eBibliotekaCloud.Repositories
                    .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Knjiga>> GetBooksAsync(string sort, string q, int? page_index, int? page_size)
+        public async Task<IEnumerable<Knjiga>> GetBooksAsync(string sort, string q, int? page_index, int? page_size, int? kategorija)
         {
             var books = await _context.Knjige
                    .Include(b => b.Autor)
@@ -64,6 +64,7 @@ namespace eBibliotekaCloud.Repositories
                 books = books.Where(b => b.Naziv.Contains(q, StringComparison.CurrentCultureIgnoreCase)
                 || b.Autor.Ime.Contains(q, StringComparison.CurrentCultureIgnoreCase)
                 || b.Autor.Prezime.Contains(q, StringComparison.CurrentCultureIgnoreCase)
+                || (b.Autor.Ime + " " + b.Autor.Prezime).Contains(q, StringComparison.CurrentCultureIgnoreCase)
                 || b.Izdavac.Naziv.Contains(q, StringComparison.CurrentCultureIgnoreCase)
                 || b.ISBN.Contains(q, StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
@@ -86,12 +87,6 @@ namespace eBibliotekaCloud.Repositories
                     case "naziv_desc":
                         books = books.OrderByDescending(b => b.Naziv).ToList();
                         break;
-                    case "cijena":
-                        books = books.OrderBy(b => b.Cijena).ToList();
-                        break;
-                    case "cijena_desc":
-                        books = books.OrderByDescending(b => b.Naziv).ToList();
-                        break;
                     case "godina":
                         books = books.OrderBy(b => b.GodinaIzdavanja).ToList();
                         break;
@@ -101,6 +96,14 @@ namespace eBibliotekaCloud.Repositories
 
                 }
             }
+
+            //get knjige po kategoriji
+
+            if (kategorija.HasValue)
+            {
+                books = books.Where(b => b.KategorijaId.Equals(kategorija)).ToList();
+            }
+
 
             int count = books.Count;
             books = PaginatedList<Knjiga>.Create(books.AsQueryable(), page_index ?? 1, page_size ?? 5);
@@ -124,8 +127,6 @@ namespace eBibliotekaCloud.Repositories
 
             //_context.Update(knjiga);
             book.Naziv = knjiga.Naziv;
-            book.Cijena = knjiga.Cijena;
-            book.Popust = knjiga.Popust;
             book.Dostupno = knjiga.Dostupno;
             book.Ukupno = knjiga.Ukupno;
             book.IzdavacId = knjiga.IzdavacId;
@@ -134,9 +135,9 @@ namespace eBibliotekaCloud.Repositories
             book.KategorijaId = knjiga.KategorijaId;
             book.PdfUrl = knjiga.PdfUrl;
             book.ImageUrl = knjiga.ImageUrl;
-            book.KratkiOpis = knjiga.KratkiOpis;
-            book.DugiOpis = knjiga.DugiOpis;
-            return await _context.SaveChangesAsync() > 0;
+            book.Opis = knjiga.Opis;
+            var saved = await _context.SaveChangesAsync() > 0;
+            return saved;
 
         }
     }

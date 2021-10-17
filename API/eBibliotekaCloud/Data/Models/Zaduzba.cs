@@ -11,10 +11,10 @@ namespace eBibliotekaCloud.Models
         public DateTime DatumZaduzbe { get; set; }
         public DateTime DatumPovratka { get; set; }
         public DateTime DatumVracanja { get; set; }
-        public int Kolicina { get; set; }
         public bool IsZavrsena { get; set; }
 
-        public ICollection<ZaduzbaStavke> Stavke { get; set; }
+        public int KnjigaId { get; set; }
+        public Knjiga Knjiga { get; set; }
 
         public int KorisnikId { get; set; }
         public Korisnik Korisnik { get; set; }
@@ -25,7 +25,6 @@ namespace eBibliotekaCloud.Models
         public Zaduzba()
         {
             IsZavrsena = false;
-            Kolicina = 1;
             DatumZaduzbe = DateTime.Now;
             DatumPovratka = DatumZaduzbe + new TimeSpan(15, 0, 0, 0);
 

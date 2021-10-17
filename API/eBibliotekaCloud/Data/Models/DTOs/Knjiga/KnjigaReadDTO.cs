@@ -17,10 +17,7 @@ namespace eBibliotekaCloud.Data.Models.DTOs.Knjiga
         public string Naziv { get; set; }
         public string ISBN { get; set; }
         public int GodinaIzdavanja { get; set; }
-        public string KratkiOpis { get; set; }
-        public string DugiOpis { get; set; }
-        public double Popust { get; set; }
-        public double Cijena { get; set; }
+        public string Opis { get; set; }
         public int Dostupno { get; set; } //broj knjiga koje su dostupne
         public int Ukupno { get; set; } //ukupan broj knjiga(dostupnih i nedostupnih)
         public string ImageUrl { get; set; }
