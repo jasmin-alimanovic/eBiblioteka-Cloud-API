@@ -13,6 +13,8 @@ namespace eBibliotekaCloud.MappingProfiles
         public AutorProfile()
         {
             CreateMap<Autor, AutorReadDTO>();
+            CreateMap<AutorCreateDTO, Autor>();
+            CreateMap<AutorUpdateDTO, Autor>();
         }
     }
 }

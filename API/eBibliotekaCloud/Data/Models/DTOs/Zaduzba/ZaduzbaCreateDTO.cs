@@ -7,11 +7,9 @@ namespace eBibliotekaCloud.Data.Models.DTOs.Zaduzba
 {
     public class ZaduzbaCreateDTO
     {
-        public DateTime DatumZaduzbe { get; set; }
-        public DateTime DatumPovratka { get; set; }
-        public DateTime DatumVracanja { get; set; }
-        public int Kolicina { get; set; }
+        
 
         public int KorisnikId { get; set; }
+        public int KnjigaId { get; set; }
     }
 }

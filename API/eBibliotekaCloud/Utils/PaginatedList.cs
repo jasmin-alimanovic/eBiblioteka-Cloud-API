@@ -17,6 +17,11 @@ namespace eBibliotekaCloud.Utils
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             this.AddRange(items);
         }
+        
+        public PaginatedList()
+        {
+
+        }
 
         public bool HasPreviousPage
         {

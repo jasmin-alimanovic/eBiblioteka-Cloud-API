@@ -1,5 +1,5 @@
-﻿using eBibliotekaCloud.Data.Models.DTOs.Korisnik;
-using eBibliotekaCloud.Data.Models.DTOs.ZaduzbaStavke;
+﻿using eBibliotekaCloud.Data.Models.DTOs.Knjiga;
+using eBibliotekaCloud.Data.Models.DTOs.Korisnik;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +13,10 @@ namespace eBibliotekaCloud.Data.Models.DTOs.Zaduzba
         public DateTime DatumZaduzbe { get; set; }
         public DateTime DatumPovratka { get; set; }
         public DateTime DatumVracanja { get; set; }
-        public int Kolicina { get; set; }
         public bool IsZavrsena { get; set; }
 
-        public ICollection<ZaduzbaStavkeReadDTO> Stavke { get; set; }
 
         public KorisnikReadDTO Korisnik { get; set; }
+        public KnjigaReadDTO Knjiga { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace eBibliotekaCloud.Services
         public async Task<KnjigaReadDTO> AddBookAsync(KnjigaCreateDto knjigaCreateDTO)
         {
             var knjiga = _mapper.Map<Knjiga>(knjigaCreateDTO);
+            knjiga.Dostupno = knjigaCreateDTO.Ukupno;
             var result =  await _repo.AddBookAsync(knjiga);
             return _mapper.Map<KnjigaReadDTO>(result);
         }
@@ -37,9 +38,9 @@ namespace eBibliotekaCloud.Services
             return _mapper.Map<KnjigaReadDTO>(result);
         }
 
-        public async Task<IEnumerable<KnjigaReadDTO>> GetBooksAsync(string sort, string q, int? page_index, int? page_size)
+        public async Task<IEnumerable<KnjigaReadDTO>> GetBooksAsync(string sort, string q, int? page_index, int? page_size, int? kategorija)
         {
-            var result = await _repo.GetBooksAsync(sort, q, page_index, page_size);
+            var result = await _repo.GetBooksAsync(sort, q, page_index, page_size, kategorija);
             return _mapper.Map<IEnumerable<KnjigaReadDTO>>(result) ;
         }
 

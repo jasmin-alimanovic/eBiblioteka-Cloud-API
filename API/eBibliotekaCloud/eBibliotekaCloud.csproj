@@ -5,8 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Models\DTOs\Zaposlenik\ZaposlenikReadDTO.cs~RFe7cef29d.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FirebaseAdmin" Version="2.2.0" />
+    <PackageReference Include="FluentEmail.Razor" Version="3.0.0" />
+    <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -23,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Models\DTOs\Zaposlenik\" />
+    <ProjectReference Include="..\Email\Email.csproj" />
   </ItemGroup>
 
 </Project>
