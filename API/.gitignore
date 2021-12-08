@@ -453,5 +453,5 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-eBibliotekaCloud/Utils/production-secrets.json
-eBibliotekaCloud/Utils/secrets.json
+**/production-secrets.json
+**/secrets.json
