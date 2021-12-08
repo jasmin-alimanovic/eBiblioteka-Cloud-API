@@ -75,7 +75,8 @@ namespace eBibliotekaCloud
                     {
                         ValidateIssuer = true,
                         ValidIssuer = "https://securetoken.google.com/ebibliotekadev",
-                        ValidateLifetime = true
+                        ValidateLifetime = true,
+                        ValidateAudience=false
                     };
                 });
             }
@@ -90,7 +91,8 @@ namespace eBibliotekaCloud
                     {
                         ValidateIssuer = true,
                         ValidIssuer = "https://securetoken.google.com/ebilioteka-production",
-                        ValidateLifetime = true
+                        ValidateLifetime = true,
+                        ValidateAudience = false
                     };
                 });
             }
