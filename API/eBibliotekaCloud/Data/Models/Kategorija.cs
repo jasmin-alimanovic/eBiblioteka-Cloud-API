@@ -9,5 +9,6 @@ namespace eBibliotekaCloud.Models
     {
         public int Id { get; set; }
         public string Naziv { get; set; }
+        public ICollection<Knjiga> Knjige { get; set; }
     }
 }

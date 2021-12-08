@@ -12,8 +12,6 @@ namespace eBibliotekaCloud.Models
         public DateTime DatumNabavke { get; set; }
         public int Kolicina { get; set; }
 
-        public int BibliotekaId { get; set; }
-        public Biblioteka Biblioteka{ get; set; }
 
         public int KnjigaId { get; set; }
         public Knjiga Knjiga { get; set; }

@@ -23,8 +23,5 @@ namespace eBibliotekaCloud.Models
         public int UlogaId { get; set; }
         public Uloga Uloga { get; set; }
 
-        //FK za biblioteku
-        public int BibliotekaId { get; set; }
-        public Biblioteka Biblioteka { get; set; }
     }
 }

@@ -19,17 +19,17 @@ namespace eBibliotekaCloud.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("KnjigaZanr", b =>
+            modelBuilder.Entity("eBibliotekaCloud.Data.Models.KnjigaZanr", b =>
                 {
-                    b.Property<int>("KnjigeId")
+                    b.Property<int>("KnjigaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ZanroviId")
+                    b.Property<int>("ZanrId")
                         .HasColumnType("int");
 
-                    b.HasKey("KnjigeId", "ZanroviId");
+                    b.HasKey("KnjigaId", "ZanrId");
 
-                    b.HasIndex("ZanroviId");
+                    b.HasIndex("ZanrId");
 
                     b.ToTable("KnjigaZanr");
                 });
@@ -50,36 +50,6 @@ namespace eBibliotekaCloud.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Autori");
-                });
-
-            modelBuilder.Entity("eBibliotekaCloud.Models.Biblioteka", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Adresa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("CijenaClanarine")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Grad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Naziv")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Biblioteke");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Izdavac", b =>
@@ -169,23 +139,21 @@ namespace eBibliotekaCloud.Migrations
                     b.Property<int>("AutorId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Cijena")
-                        .HasColumnType("float");
-
                     b.Property<int>("Dostupno")
                         .HasColumnType("int");
-
-                    b.Property<string>("DugiOpis")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GodinaIzdavanja")
                         .HasColumnType("int");
 
                     b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Izdanje")
                         .HasColumnType("nvarchar(max)");
@@ -199,10 +167,10 @@ namespace eBibliotekaCloud.Migrations
                     b.Property<int>("KategorijaId")
                         .HasColumnType("int");
 
-                    b.Property<string>("KratkiOpis")
+                    b.Property<string>("Naziv")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Naziv")
+                    b.Property<string>("Opis")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PdfUrl")
@@ -211,15 +179,15 @@ namespace eBibliotekaCloud.Migrations
                     b.Property<string>("Pismo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Popust")
-                        .HasColumnType("float");
-
                     b.Property<int>("Ukupno")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AutorId");
+
+                    b.HasIndex("ISBN")
+                        .IsUnique();
 
                     b.HasIndex("IzdavacId");
 
@@ -237,9 +205,6 @@ namespace eBibliotekaCloud.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BibliotekaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DatumNabavke")
                         .HasColumnType("datetime2");
 
@@ -253,8 +218,6 @@ namespace eBibliotekaCloud.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BibliotekaId");
 
                     b.HasIndex("KnjigaId");
 
@@ -271,8 +234,8 @@ namespace eBibliotekaCloud.Migrations
                     b.Property<string>("Adresa")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BibliotekaId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DatumUclanjenja")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -296,8 +259,6 @@ namespace eBibliotekaCloud.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BibliotekaId");
 
                     b.ToTable("Korisnici");
                 });
@@ -336,7 +297,7 @@ namespace eBibliotekaCloud.Migrations
                     b.Property<bool>("IsZavrsena")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Kolicina")
+                    b.Property<int>("KnjigaId")
                         .HasColumnType("int");
 
                     b.Property<int>("KorisnikId")
@@ -344,37 +305,11 @@ namespace eBibliotekaCloud.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KnjigaId");
+
                     b.HasIndex("KorisnikId");
 
                     b.ToTable("Zaduzbe");
-                });
-
-            modelBuilder.Entity("eBibliotekaCloud.Models.ZaduzbaStavke", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsVracena")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("KnjigaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Kolicina")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ZaduzbaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("KnjigaId");
-
-                    b.HasIndex("ZaduzbaId");
-
-                    b.ToTable("StavkeZaduzbi");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Zanr", b =>
@@ -399,9 +334,6 @@ namespace eBibliotekaCloud.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BibliotekaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -422,26 +354,28 @@ namespace eBibliotekaCloud.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BibliotekaId");
-
                     b.HasIndex("UlogaId");
 
                     b.ToTable("Zaposlenci");
                 });
 
-            modelBuilder.Entity("KnjigaZanr", b =>
+            modelBuilder.Entity("eBibliotekaCloud.Data.Models.KnjigaZanr", b =>
                 {
-                    b.HasOne("eBibliotekaCloud.Models.Knjiga", null)
-                        .WithMany()
-                        .HasForeignKey("KnjigeId")
+                    b.HasOne("eBibliotekaCloud.Models.Knjiga", "Knjiga")
+                        .WithMany("KnjigaZanr")
+                        .HasForeignKey("KnjigaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("eBibliotekaCloud.Models.Zanr", null)
-                        .WithMany()
-                        .HasForeignKey("ZanroviId")
+                    b.HasOne("eBibliotekaCloud.Models.Zanr", "Zanr")
+                        .WithMany("KnjigaZanr")
+                        .HasForeignKey("ZanrId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Knjiga");
+
+                    b.Navigation("Zanr");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Kartica", b =>
@@ -476,7 +410,7 @@ namespace eBibliotekaCloud.Migrations
                         .IsRequired();
 
                     b.HasOne("eBibliotekaCloud.Models.Kategorija", "Kategorija")
-                        .WithMany()
+                        .WithMany("Knjige")
                         .HasForeignKey("KategorijaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -492,79 +426,41 @@ namespace eBibliotekaCloud.Migrations
 
             modelBuilder.Entity("eBibliotekaCloud.Models.KnjigaNabavka", b =>
                 {
-                    b.HasOne("eBibliotekaCloud.Models.Biblioteka", "Biblioteka")
-                        .WithMany("Nabavka")
-                        .HasForeignKey("BibliotekaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("eBibliotekaCloud.Models.Knjiga", "Knjiga")
                         .WithMany("Nabavke")
                         .HasForeignKey("KnjigaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Biblioteka");
-
                     b.Navigation("Knjiga");
-                });
-
-            modelBuilder.Entity("eBibliotekaCloud.Models.Korisnik", b =>
-                {
-                    b.HasOne("eBibliotekaCloud.Models.Biblioteka", "Biblioteka")
-                        .WithMany("Korisnici")
-                        .HasForeignKey("BibliotekaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Biblioteka");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Zaduzba", b =>
                 {
-                    b.HasOne("eBibliotekaCloud.Models.Korisnik", "Korisnik")
-                        .WithMany()
-                        .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Korisnik");
-                });
-
-            modelBuilder.Entity("eBibliotekaCloud.Models.ZaduzbaStavke", b =>
-                {
                     b.HasOne("eBibliotekaCloud.Models.Knjiga", "Knjiga")
-                        .WithMany()
+                        .WithMany("Zaduzbe")
                         .HasForeignKey("KnjigaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("eBibliotekaCloud.Models.Zaduzba", "Zaduzba")
-                        .WithMany("Stavke")
-                        .HasForeignKey("ZaduzbaId")
+                    b.HasOne("eBibliotekaCloud.Models.Korisnik", "Korisnik")
+                        .WithMany("Zaduzbe")
+                        .HasForeignKey("KorisnikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Knjiga");
 
-                    b.Navigation("Zaduzba");
+                    b.Navigation("Korisnik");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Zaposlenik", b =>
                 {
-                    b.HasOne("eBibliotekaCloud.Models.Biblioteka", "Biblioteka")
-                        .WithMany("Zaposlenici")
-                        .HasForeignKey("BibliotekaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("eBibliotekaCloud.Models.Uloga", "Uloga")
                         .WithMany()
                         .HasForeignKey("UlogaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Biblioteka");
 
                     b.Navigation("Uloga");
                 });
@@ -572,15 +468,6 @@ namespace eBibliotekaCloud.Migrations
             modelBuilder.Entity("eBibliotekaCloud.Models.Autor", b =>
                 {
                     b.Navigation("Knjige");
-                });
-
-            modelBuilder.Entity("eBibliotekaCloud.Models.Biblioteka", b =>
-                {
-                    b.Navigation("Korisnici");
-
-                    b.Navigation("Nabavka");
-
-                    b.Navigation("Zaposlenici");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Izdavac", b =>
@@ -593,19 +480,30 @@ namespace eBibliotekaCloud.Migrations
                     b.Navigation("Knjige");
                 });
 
+            modelBuilder.Entity("eBibliotekaCloud.Models.Kategorija", b =>
+                {
+                    b.Navigation("Knjige");
+                });
+
             modelBuilder.Entity("eBibliotekaCloud.Models.Knjiga", b =>
                 {
+                    b.Navigation("KnjigaZanr");
+
                     b.Navigation("Nabavke");
+
+                    b.Navigation("Zaduzbe");
                 });
 
             modelBuilder.Entity("eBibliotekaCloud.Models.Korisnik", b =>
                 {
                     b.Navigation("Kartice");
+
+                    b.Navigation("Zaduzbe");
                 });
 
-            modelBuilder.Entity("eBibliotekaCloud.Models.Zaduzba", b =>
+            modelBuilder.Entity("eBibliotekaCloud.Models.Zanr", b =>
                 {
-                    b.Navigation("Stavke");
+                    b.Navigation("KnjigaZanr");
                 });
 #pragma warning restore 612, 618
         }

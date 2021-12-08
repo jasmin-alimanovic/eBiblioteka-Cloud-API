@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eBibliotekaCloud.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,16 +12,14 @@ namespace eBibliotekaCloud.Models
         public string Naziv { get; set; }
         public string ISBN { get; set; }
         public int GodinaIzdavanja { get; set; }
-        public string KratkiOpis { get; set; }
-        public string DugiOpis { get; set; }
-        public double Popust { get; set; }
-        public double Cijena { get; set; }
+        public string Opis { get; set; }
         public int Dostupno { get; set; } //broj knjiga koje su dostupne
         public int Ukupno { get; set; } //ukupan broj knjiga(dostupnih i nedostupnih)
         public string ImageUrl { get; set; }
         public string PdfUrl { get; set; }
         public string Izdanje { get; set; }
         public string Pismo{ get; set; }
+        public bool IsDeleted { get; set; }
 
 
         //FK za autora
@@ -43,7 +42,8 @@ namespace eBibliotekaCloud.Models
         public Kategorija Kategorija { get; set; }
 
         //FK za zanrove
-        public ICollection<Zanr> Zanrovi { get; set; }
+        public ICollection<KnjigaZanr> KnjigaZanr { get; set; }
+        public ICollection<Zaduzba> Zaduzbe { get; set; }
 
 
     }
